@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import tmdbRequest from "../apiEndPoints";
 import singleMovie from "../models/featuredMovies";
 
@@ -27,7 +27,7 @@ const LoggedInHero = ({ featuredMovies }: Props) => {
         {imageUrls.map((movieObject, index) => {
           if (index > 2) return null;
           return (
-            <div>
+            <div key={index}>
               <motion.div
                 variants={variant}
                 transition={{ duration: 1 }}
@@ -38,8 +38,8 @@ const LoggedInHero = ({ featuredMovies }: Props) => {
                 key={movieObject?.id}
                 className={`${index === activeSlide ? "" : "hidden"} flex items-end md:items-center text-white bg-no-repeat bg-cover md:bg-cover md:bg-center bg-gradient-to-b to-black text-5xl h-[80vw] bg-bottom  md:h-[90vh]  top-0 z-[-1]  w-full min-h-[200px] `}
               >
-                <div className="hidden md:block">
-                  <div className="bg-slate-500/60 w-full md:w-[50%] py-5 px-10 h-[350px] absolute md:static bottom-[-350px] md:bottom-0 md:mt-0">
+                <div className="hidden md:block min-w-full">
+                  <div className="bg-slate-500/60 w-full md:min-w-[50%] md:w-[50%] py-5 px-10 h-[350px] absolute md:static bottom-[-350px] md:bottom-0 md:mt-0">
                     <div className="h-[100%] flex flex-col justify-between">
                       <h2 className="text-2xl md:text-5xl text-center md:text-left">
                         {movieObject?.original_title}
@@ -85,7 +85,7 @@ const LoggedInHero = ({ featuredMovies }: Props) => {
                   variants={variant}
                   transition={{ duration: 1 }}
                   animate={index === activeSlide ? "show" : "hide"}
-                  className={` bg-slate-500/60 w-full py-5 px-10   h-[350px] text-white ${index === activeSlide ? "" : "hidden"}`}
+                  className={` bg-slate-500/60 w-full py-5 px-10   h-[250px] text-white ${index === activeSlide ? "" : "hidden"}`}
                 >
                   <div className="h-[100%] flex flex-col justify-between">
                     <h2 className="text-2xl md:text-5xl text-center md:text-left">
