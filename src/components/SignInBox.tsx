@@ -9,13 +9,14 @@ const SignInBox = () => {
           </div>
           <div className="flex flex-col pt-5">
             <input
-              className="mt-4 px-4 py-2 rounded-lg"
-              type="text"
+              className="mt-4 px-4 py-2 rounded-lg text-black"
+              type="email"
               placeholder="Email"
+
             />
             <input
-              className="mt-4 px-4 py-2 rounded-lg"
-              type="text"
+              className="mt-4 px-4 py-2 rounded-lg text-black"
+              type="password"
               placeholder="Password"
             />
           </div>

@@ -4,7 +4,8 @@ import tmdbRequest from "../apiEndPoints";
 import singleMovie from "../models/featuredMovies";
 
 interface Props {
-  featuredMovies: singleMovie[];
+  featuredMovies: singleMovie[],
+
 }
 
 const LoggedInHero = ({ featuredMovies }: Props) => {
@@ -19,6 +20,7 @@ const LoggedInHero = ({ featuredMovies }: Props) => {
   };
   useEffect(() => {
     setimageUrls(() => featuredMovies);
+ 
   }, [featuredMovies]);
 
   return (

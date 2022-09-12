@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import tmdbRequest from '../apiEndPoints'
+import LoadingSpinner from '../components/LoadingSpinner';
 import LoggedInHero from '../components/LoggedInHero';
 import MovieCollectionSlider from '../components/MovieCollectionSlider';
 import singleMovie from '../models/featuredMovies';
@@ -7,11 +8,17 @@ import singleMovie from '../models/featuredMovies';
 const Homepage = () => {
 
   const [featuredMovies, setfeaturedMovies] = useState<singleMovie[]>([]);
+  const [dataLoaded,setDataLoaded]=useState<boolean>(false);
   const [popularMovies, setpopularMovies] = useState<singleMovie[]>([]);
   const [upcomingMovies, setupcomingMovies] = useState<singleMovie[]>([]);
   const [topRatedMovies, settopRatedMovies] = useState<singleMovie[]>([]);
   const [latestMovies, setlatestMovies] = useState<singleMovie[]>([]);
   
+  const DataLoadingFunction=()=>{
+    setDataLoaded(true);
+  }
+
+
   const popularMovieRequest=async ()=>{
     const response=await fetch(tmdbRequest.popularMovies,{
       method:'GET'
@@ -55,10 +62,14 @@ const Homepage = () => {
   }, [])
   useEffect(() => {
     let shuffledMovies:singleMovie[]=[...popularMovies].sort( () => .5 - Math.random() );
-    setfeaturedMovies(()=>[...shuffledMovies]);
+    setfeaturedMovies(()=>{
+      return [...shuffledMovies]
+    });
     console.log(` latest movies ${latestMovies}`);
+    setDataLoaded(true);
   }, [popularMovies,latestMovies])
   // console.log(featuredMovies);
+  if(!dataLoaded) return <LoadingSpinner/>;
   return (
     <div >
         <LoggedInHero featuredMovies={[...featuredMovies]}/>
